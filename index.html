@@ -3,24 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Lovable App</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Cascade Premier | Authentic Kenyan Dining in Thika Town</title>
+    <meta name="description" content="Cascade Premier — Thika's favourite restaurant. Legendary Uji Special, artisan pizza, authentic African cuisine, event venues & catering. Open daily 6AM–9PM." />
+    <meta property="og:title" content="Cascade Premier | Authentic Kenyan Dining" />
+    <meta property="og:description" content="Thika's finest dining destination. Legendary Uji, authentic cuisine, event venues seating 200+." />
+    <meta property="og:type" content="restaurant" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
-
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Cascade Premier",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Thika",
+        "addressRegion": "Kiambu",
+        "addressCountry": "KE"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.1",
+        "reviewCount": "1064"
+      },
+      "priceRange": "KES 500-1000",
+      "servesCuisine": "African, Kenyan",
+      "openingHours": "Mo-Su 06:00-21:00"
+    }
+    </script>
   </body>
 </html>
