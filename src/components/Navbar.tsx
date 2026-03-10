@@ -39,15 +39,25 @@ const Navbar = () => {
 
           {/* Desktop */}
           <div className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-body text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="font-body text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-body text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
             <a
               href="https://glovoapp.com"
               target="_blank"
