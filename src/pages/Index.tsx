@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import MenuHighlights from "@/components/MenuHighlights";
+import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import Events from "@/components/Events";
 import Reservation from "@/components/Reservation";
@@ -14,6 +15,7 @@ const Index = () => {
       <Hero />
       <About />
       <MenuHighlights />
+      <Gallery />
       <Testimonials />
       <section id="events">
         <Events />
