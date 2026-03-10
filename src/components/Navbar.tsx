@@ -88,16 +88,27 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-background/95 backdrop-blur-lg md:hidden"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="font-display text-2xl font-bold text-foreground transition-colors hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="font-display text-2xl font-bold text-foreground transition-colors hover:text-primary"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="font-display text-2xl font-bold text-foreground transition-colors hover:text-primary"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
             <a
               href="https://glovoapp.com"
               target="_blank"
