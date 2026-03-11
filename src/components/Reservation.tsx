@@ -1,13 +1,52 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Reservation = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [form, setForm] = useState({
+    full_name: "",
+    phone: "",
+    reservation_date: "",
+    reservation_time: "",
+    guests: "",
+    occasion: "",
+    special_requests: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const { error: dbError } = await supabase.from("reservations").insert({
+      full_name: form.full_name.trim().slice(0, 100),
+      phone: form.phone.trim().slice(0, 15),
+      reservation_date: form.reservation_date,
+      reservation_time: form.reservation_time,
+      guests: form.guests,
+      occasion: form.occasion || null,
+      special_requests: form.special_requests.trim().slice(0, 500) || null,
+    });
+
+    setLoading(false);
+
+    if (dbError) {
+      setError("Something went wrong. Please try again or call us at 0708 888 444.");
+      return;
+    }
+
     setSubmitted(true);
   };
 
@@ -53,8 +92,11 @@ const Reservation = () => {
                   </label>
                   <input
                     type="text"
+                    name="full_name"
                     required
                     maxLength={100}
+                    value={form.full_name}
+                    onChange={handleChange}
                     className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
                     placeholder="Your name"
                   />
@@ -65,8 +107,11 @@ const Reservation = () => {
                   </label>
                   <input
                     type="tel"
+                    name="phone"
                     required
                     maxLength={15}
+                    value={form.phone}
+                    onChange={handleChange}
                     className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
                     placeholder="+254 7XX XXX XXX"
                   />
@@ -77,7 +122,10 @@ const Reservation = () => {
                   </label>
                   <input
                     type="date"
+                    name="reservation_date"
                     required
+                    value={form.reservation_date}
+                    onChange={handleChange}
                     className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
                   />
                 </div>
@@ -87,7 +135,10 @@ const Reservation = () => {
                   </label>
                   <input
                     type="time"
+                    name="reservation_time"
                     required
+                    value={form.reservation_time}
+                    onChange={handleChange}
                     className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
                   />
                 </div>
@@ -96,7 +147,10 @@ const Reservation = () => {
                     Guests
                   </label>
                   <select
+                    name="guests"
                     required
+                    value={form.guests}
+                    onChange={handleChange}
                     className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
                   >
                     <option value="" className="bg-card">Select</option>
@@ -111,7 +165,12 @@ const Reservation = () => {
                   <label className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
                     Occasion
                   </label>
-                  <select className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary">
+                  <select
+                    name="occasion"
+                    value={form.occasion}
+                    onChange={handleChange}
+                    className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
+                  >
                     <option value="" className="bg-card">Select (optional)</option>
                     <option value="casual" className="bg-card">Casual Dining</option>
                     <option value="birthday" className="bg-card">Birthday</option>
@@ -128,18 +187,26 @@ const Reservation = () => {
                   Special Requests
                 </label>
                 <textarea
+                  name="special_requests"
                   maxLength={500}
                   rows={3}
+                  value={form.special_requests}
+                  onChange={handleChange}
                   className="w-full border-b border-border bg-transparent py-3 font-body text-foreground outline-none transition-colors focus:border-primary"
                   placeholder="Any special requirements..."
                 />
               </div>
 
+              {error && (
+                <p className="mt-4 font-body text-sm text-destructive">{error}</p>
+              )}
+
               <button
                 type="submit"
-                className="bg-gold-gradient mt-8 w-full py-4 font-body text-sm font-semibold uppercase tracking-widest text-primary-foreground transition-all hover:opacity-90"
+                disabled={loading}
+                className="bg-gold-gradient mt-8 w-full py-4 font-body text-sm font-semibold uppercase tracking-widest text-primary-foreground transition-all hover:opacity-90 disabled:opacity-50"
               >
-                Reserve Now
+                {loading ? "Submitting..." : "Reserve Now"}
               </button>
             </form>
           )}
