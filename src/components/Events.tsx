@@ -45,10 +45,10 @@ const Events = () => {
               Book a Venue
             </a>
             <a
-              href="tel:+254700000000"
+              href="tel:+254708888444"
               className="border border-primary/40 px-10 py-4 font-body text-sm font-semibold uppercase tracking-widest text-primary transition-all hover:border-primary hover:bg-primary/10"
             >
-              Call Us
+              Call 0708 888 444
             </a>
           </div>
         </motion.div>
