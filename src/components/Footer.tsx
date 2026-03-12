@@ -45,10 +45,15 @@ const Footer = () => {
               Contact
             </h4>
             <div className="space-y-3 font-body text-sm text-muted-foreground">
-              <div className="flex items-start gap-2">
+              <a 
+                href="https://maps.app.goo.gl/GypH5QrnLeuq3xGb6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 transition-colors hover:text-primary"
+              >
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary/60" />
                 <p>Thika Town, Kiambu County, Kenya</p>
-              </div>
+              </a>
               <a 
                 href="tel:+254708888444"
                 className="flex items-center gap-2 transition-colors hover:text-primary"
