@@ -126,3 +126,7 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(36 60% 52% / 0.5);
 }
+
+#lovable-badge {
+  display: none !important;
+}
