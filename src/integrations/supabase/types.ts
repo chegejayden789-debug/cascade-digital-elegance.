@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_logs: {
+        Row: {
+          action: string
+          created_at: string
+          description: string
+          entity_id: string | null
+          entity_type: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          description: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          description?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
       reservations: {
         Row: {
           created_at: string
@@ -24,8 +51,10 @@ export type Database = {
           phone: string
           reservation_date: string
           reservation_time: string
+          revenue_amount: number | null
           special_requests: string | null
           status: string
+          table_id: string | null
           updated_at: string
         }
         Insert: {
@@ -37,8 +66,10 @@ export type Database = {
           phone: string
           reservation_date: string
           reservation_time: string
+          revenue_amount?: number | null
           special_requests?: string | null
           status?: string
+          table_id?: string | null
           updated_at?: string
         }
         Update: {
@@ -50,8 +81,48 @@ export type Database = {
           phone?: string
           reservation_date?: string
           reservation_time?: string
+          revenue_amount?: number | null
           special_requests?: string | null
           status?: string
+          table_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_reservations_table"
+            columns: ["table_id"]
+            isOneToOne: false
+            referencedRelation: "restaurant_tables"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      restaurant_tables: {
+        Row: {
+          capacity: number
+          created_at: string
+          id: string
+          location: string | null
+          status: string
+          table_number: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          created_at?: string
+          id?: string
+          location?: string | null
+          status?: string
+          table_number: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          id?: string
+          location?: string | null
+          status?: string
+          table_number?: string
           updated_at?: string
         }
         Relationships: []
