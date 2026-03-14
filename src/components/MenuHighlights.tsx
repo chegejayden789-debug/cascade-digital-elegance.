@@ -14,11 +14,11 @@ const categories = [
     tag: "Signature",
   },
   {
-    title: "Beef Pilau",
-    description: "Aromatic spiced rice slow-cooked with tender beef, a Kenyan classic done to perfection.",
-    price: "KES 500",
+    title: "Deep Fried Whole Tilapia",
+    description: "Golden crispy tilapia served with your choice of sides and fresh salad.",
+    price: "KES 600",
     image: pilauImg,
-    tag: "Favourite",
+    tag: "Popular",
   },
   {
     title: "Artisan Pizza",
