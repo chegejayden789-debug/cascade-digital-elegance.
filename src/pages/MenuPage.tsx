@@ -138,7 +138,7 @@ const menuData: Category[] = [
   {
     id: "soups",
     label: "Soups",
-    image: breakfastImg,
+    image: soupsImg,
     items: [
       { name: "Oxtail Soup", description: "Slow-simmered oxtail in a rich, hearty broth", price: "245" },
       { name: "Bone Soup", description: "Traditional bone broth soup", price: "210" },
