@@ -8,6 +8,11 @@ import pilauImg from "@/assets/pilau.jpg";
 import pizzaImg from "@/assets/pizza.jpg";
 import mukimoImg from "@/assets/mukimo.jpg";
 import drinksImg from "@/assets/menu-drinks.jpg";
+import fishImg from "@/assets/menu-fish.jpg";
+import chickenImg from "@/assets/menu-chicken.jpg";
+import wrapsImg from "@/assets/menu-wraps.jpg";
+import soupsImg from "@/assets/menu-soups.jpg";
+import coffeeImg from "@/assets/menu-coffee.jpg";
 
 type MenuItem = {
   name: string;
@@ -57,7 +62,7 @@ const menuData: Category[] = [
   {
     id: "chicken",
     label: "Chicken",
-    image: pilauImg,
+    image: chickenImg,
     items: [
       { name: "Chicken Curry", description: "Tender chicken pieces in aromatic curry sauce", price: "490" },
       { name: "Supreme Chicken", description: "Premium chicken dish served with accompaniments", price: "590" },
@@ -77,7 +82,7 @@ const menuData: Category[] = [
   {
     id: "fish",
     label: "Fish",
-    image: breakfastImg,
+    image: fishImg,
     items: [
       { name: "Deep Fried Whole Tilapia", description: "Served with Chips/Chapati/Irio/Rice/Pilau/Ugali and side salad or vegetables", price: "600", tag: "Popular" },
       { name: "Wet Fried Whole Tilapia", description: "Served with Chips/Chapati/Irio/Rice/Pilau/Ugali and side salad or vegetables", price: "600" },
@@ -122,7 +127,7 @@ const menuData: Category[] = [
   {
     id: "wraps",
     label: "Wraps",
-    image: pizzaImg,
+    image: wrapsImg,
     items: [
       { name: "Chicken Wrap", description: "Chicken strips with stir-fried vegetables wrapped in mandar", price: "290" },
       { name: "Vegetable Wrap", description: "Fresh vegetables wrapped in mandar", price: "290" },
@@ -133,7 +138,7 @@ const menuData: Category[] = [
   {
     id: "soups",
     label: "Soups",
-    image: breakfastImg,
+    image: soupsImg,
     items: [
       { name: "Oxtail Soup", description: "Slow-simmered oxtail in a rich, hearty broth", price: "245" },
       { name: "Bone Soup", description: "Traditional bone broth soup", price: "210" },
@@ -144,7 +149,7 @@ const menuData: Category[] = [
   {
     id: "coffee",
     label: "Coffee",
-    image: drinksImg,
+    image: coffeeImg,
     items: [
       { name: "Cappuccino", description: "Special tea with milk double shot", price: "265" },
       { name: "Americano", description: "Special black coffee", price: "265" },
