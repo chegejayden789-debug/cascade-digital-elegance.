@@ -127,7 +127,7 @@ const menuData: Category[] = [
   {
     id: "wraps",
     label: "Wraps",
-    image: pizzaImg,
+    image: wrapsImg,
     items: [
       { name: "Chicken Wrap", description: "Chicken strips with stir-fried vegetables wrapped in mandar", price: "290" },
       { name: "Vegetable Wrap", description: "Fresh vegetables wrapped in mandar", price: "290" },
