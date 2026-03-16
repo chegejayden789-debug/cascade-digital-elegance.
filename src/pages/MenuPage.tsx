@@ -149,7 +149,7 @@ const menuData: Category[] = [
   {
     id: "coffee",
     label: "Coffee",
-    image: drinksImg,
+    image: coffeeImg,
     items: [
       { name: "Cappuccino", description: "Special tea with milk double shot", price: "265" },
       { name: "Americano", description: "Special black coffee", price: "265" },
