@@ -82,7 +82,7 @@ const menuData: Category[] = [
   {
     id: "fish",
     label: "Fish",
-    image: breakfastImg,
+    image: fishImg,
     items: [
       { name: "Deep Fried Whole Tilapia", description: "Served with Chips/Chapati/Irio/Rice/Pilau/Ugali and side salad or vegetables", price: "600", tag: "Popular" },
       { name: "Wet Fried Whole Tilapia", description: "Served with Chips/Chapati/Irio/Rice/Pilau/Ugali and side salad or vegetables", price: "600" },
