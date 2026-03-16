@@ -8,6 +8,11 @@ import pilauImg from "@/assets/pilau.jpg";
 import pizzaImg from "@/assets/pizza.jpg";
 import mukimoImg from "@/assets/mukimo.jpg";
 import drinksImg from "@/assets/menu-drinks.jpg";
+import fishImg from "@/assets/menu-fish.jpg";
+import chickenImg from "@/assets/menu-chicken.jpg";
+import wrapsImg from "@/assets/menu-wraps.jpg";
+import soupsImg from "@/assets/menu-soups.jpg";
+import coffeeImg from "@/assets/menu-coffee.jpg";
 
 type MenuItem = {
   name: string;
