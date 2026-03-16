@@ -62,7 +62,7 @@ const menuData: Category[] = [
   {
     id: "chicken",
     label: "Chicken",
-    image: pilauImg,
+    image: chickenImg,
     items: [
       { name: "Chicken Curry", description: "Tender chicken pieces in aromatic curry sauce", price: "490" },
       { name: "Supreme Chicken", description: "Premium chicken dish served with accompaniments", price: "590" },
