@@ -1,6 +1,6 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { X } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState, useCallback, useEffect } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import interior1 from "@/assets/gallery-interior-1.jpg";
 import interior2 from "@/assets/gallery-interior-2.jpg";
 import food1 from "@/assets/gallery-food-1.jpg";
@@ -90,27 +90,65 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lightbox !== null && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-6"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            className="absolute right-6 top-6 text-foreground/70 transition-colors hover:text-foreground"
+      {/* Enhanced Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-sm"
             onClick={() => setLightbox(null)}
           >
-            <X className="h-8 w-8" />
-          </button>
-          <img
-            src={images[lightbox].src}
-            alt={images[lightbox].alt}
-            className="max-h-[85vh] max-w-full rounded-sm object-contain"
-          />
-        </motion.div>
-      )}
+            {/* Close */}
+            <button
+              className="absolute right-6 top-6 z-10 rounded-full bg-card/80 p-2 text-foreground/70 transition-colors hover:text-foreground"
+              onClick={() => setLightbox(null)}
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            {/* Counter */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 font-body text-sm text-muted-foreground">
+              {lightbox + 1} / {images.length}
+            </div>
+
+            {/* Prev */}
+            <button
+              className="absolute left-4 z-10 rounded-full bg-card/80 p-3 text-foreground/70 transition-colors hover:text-foreground sm:left-8"
+              onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + images.length) % images.length); }}
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+
+            {/* Image */}
+            <motion.img
+              key={lightbox}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              src={images[lightbox].src}
+              alt={images[lightbox].alt}
+              className="max-h-[80vh] max-w-[90vw] rounded-sm object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            {/* Next */}
+            <button
+              className="absolute right-4 z-10 rounded-full bg-card/80 p-3 text-foreground/70 transition-colors hover:text-foreground sm:right-8"
+              onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % images.length); }}
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+
+            {/* Caption */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+              <p className="font-body text-sm font-medium text-foreground">{images[lightbox].alt}</p>
+              <p className="mt-1 font-body text-xs uppercase tracking-widest text-primary">{images[lightbox].category}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
