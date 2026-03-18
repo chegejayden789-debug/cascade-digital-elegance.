@@ -41,6 +41,36 @@ export type Database = {
         }
         Relationships: []
       }
+      customer_reviews: {
+        Row: {
+          created_at: string
+          id: string
+          is_approved: boolean | null
+          name: string
+          rating: number
+          review_text: string
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          name: string
+          rating?: number
+          review_text: string
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          name?: string
+          rating?: number
+          review_text?: string
+          source?: string | null
+        }
+        Relationships: []
+      }
       reservations: {
         Row: {
           created_at: string
