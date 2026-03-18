@@ -1,6 +1,6 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { X } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState, useCallback, useEffect } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import interior1 from "@/assets/gallery-interior-1.jpg";
 import interior2 from "@/assets/gallery-interior-2.jpg";
 import food1 from "@/assets/gallery-food-1.jpg";
