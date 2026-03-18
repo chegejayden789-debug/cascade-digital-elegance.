@@ -7,22 +7,27 @@ import Testimonials from "@/components/Testimonials";
 import Events from "@/components/Events";
 import Reservation from "@/components/Reservation";
 import Footer from "@/components/Footer";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
+import PageTransition from "@/components/PageTransition";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background">
-      <Navbar />
-      <Hero />
-      <About />
-      <MenuHighlights />
-      <Gallery />
-      <Testimonials />
-      <section id="events">
-        <Events />
-      </section>
-      <Reservation />
-      <Footer />
-    </main>
+    <PageTransition>
+      <main className="min-h-screen bg-background">
+        <Navbar />
+        <Hero />
+        <About />
+        <MenuHighlights />
+        <Gallery />
+        <Testimonials />
+        <section id="events">
+          <Events />
+        </section>
+        <Reservation />
+        <Footer />
+        <WhatsAppWidget />
+      </main>
+    </PageTransition>
   );
 };
 
