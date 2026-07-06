@@ -13,7 +13,7 @@ export default defineTool({
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ status, date, limit }) => {
-    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!);
+    const supabase = createClient(process.env.SUPABASE_URL!, (process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY)!);
     let query = supabase.from("reservations").select("*").order("reservation_date", { ascending: false }).limit(limit ?? 20);
     if (status) query = query.eq("status", status);
     if (date) query = query.eq("reservation_date", date);

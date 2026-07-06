@@ -12,7 +12,7 @@ export default defineTool({
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ status, min_capacity }) => {
-    const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!);
+    const supabase = createClient(process.env.SUPABASE_URL!, (process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY)!);
     let query = supabase.from("restaurant_tables").select("*").order("table_number");
     if (status) query = query.eq("status", status);
     if (min_capacity) query = query.gte("capacity", min_capacity);

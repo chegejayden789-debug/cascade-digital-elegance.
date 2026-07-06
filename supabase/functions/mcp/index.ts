@@ -154,7 +154,7 @@ var list_reservations_default = defineTool3({
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ status, date, limit }) => {
-    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY);
+    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY);
     let query = supabase.from("reservations").select("*").order("reservation_date", { ascending: false }).limit(limit ?? 20);
     if (status) query = query.eq("status", status);
     if (date) query = query.eq("reservation_date", date);
@@ -186,7 +186,7 @@ var create_reservation_default = defineTool4({
   },
   annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: false },
   handler: async (input) => {
-    const supabase = createClient2(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY);
+    const supabase = createClient2(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY);
     const { data, error } = await supabase.from("reservations").insert({
       full_name: input.full_name,
       phone: input.phone,
@@ -218,7 +218,7 @@ var list_tables_default = defineTool5({
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ status, min_capacity }) => {
-    const supabase = createClient3(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY);
+    const supabase = createClient3(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY);
     let query = supabase.from("restaurant_tables").select("*").order("table_number");
     if (status) query = query.eq("status", status);
     if (min_capacity) query = query.gte("capacity", min_capacity);
@@ -245,7 +245,7 @@ var list_reviews_default = defineTool6({
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ min_rating, limit }) => {
-    const supabase = createClient4(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY);
+    const supabase = createClient4(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY);
     let query = supabase.from("customer_reviews").select("id, name, rating, review_text, source, created_at").eq("is_approved", true).order("created_at", { ascending: false }).limit(limit ?? 10);
     if (min_rating) query = query.gte("rating", min_rating);
     const { data, error } = await query;
