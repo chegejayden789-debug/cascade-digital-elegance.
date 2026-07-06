@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "cascade-premier-mcp",
+      "version": "0.1.0",
+      "title": "Cascade Premier"
+    },
+    "tools": [
+      {
+        "name": "get_restaurant_info",
+        "title": "Get restaurant info",
+        "description": "Returns Cascade Premier's contact details, hours, location, and social links.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_menu",
+        "title": "Get menu",
+        "description": "Returns Cascade Premier's menu, optionally filtered to a single category.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Menu category to fetch. Omit to return the full menu.",
+              "type": "string",
+              "enum": [
+                "breakfast",
+                "chicken",
+                "fish",
+                "fast_food",
+                "wraps",
+                "soups",
+                "coffee",
+                "drinks"
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_reservation",
+        "title": "Create a reservation",
+        "description": "Book a table at Cascade Premier for a specific date, time, and party size.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "full_name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "description": "Guest's full name."
+            },
+            "phone": {
+              "type": "string",
+              "minLength": 6,
+              "maxLength": 15,
+              "description": "Contact phone number in international format (e.g. +254712345678)."
+            },
+            "reservation_date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "description": "Reservation date in YYYY-MM-DD format."
+            },
+            "reservation_time": {
+              "type": "string",
+              "pattern": "^\\d{2}:\\d{2}(:\\d{2})?$",
+              "description": "Reservation time in 24h HH:MM format."
+            },
+            "guests": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Number of guests (e.g. '2', '4', '10+')."
+            },
+            "occasion": {
+              "description": "Occasion type.",
+              "type": "string",
+              "enum": [
+                "casual",
+                "birthday",
+                "business",
+                "bridal",
+                "conference",
+                "other"
+              ]
+            },
+            "special_requests": {
+              "description": "Any special requirements.",
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "required": [
+            "full_name",
+            "phone",
+            "reservation_date",
+            "reservation_time",
+            "guests"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_reservations",
+        "title": "List reservations",
+        "description": "List Cascade Premier reservations, optionally filtered by status or date. Returns up to 50 records ordered by date (newest first).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Filter by reservation status.",
+              "type": "string",
+              "enum": [
+                "pending",
+                "confirmed",
+                "completed",
+                "cancelled"
+              ]
+            },
+            "date": {
+              "description": "Filter by exact reservation date (YYYY-MM-DD).",
+              "type": "string"
+            },
+            "limit": {
+              "description": "Maximum records to return (default 20).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_tables",
+        "title": "List restaurant tables",
+        "description": "List all tables in the restaurant with their capacity, location, and current status (available, reserved, occupied).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Filter tables by current status.",
+              "type": "string",
+              "enum": [
+                "available",
+                "reserved",
+                "occupied"
+              ]
+            },
+            "min_capacity": {
+              "description": "Only return tables with at least this many seats.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_reviews",
+        "title": "List customer reviews",
+        "description": "List approved customer reviews for Cascade Premier with star ratings.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "min_rating": {
+              "description": "Only return reviews with at least this star rating.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "limit": {
+              "description": "Maximum reviews to return (default 10).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
